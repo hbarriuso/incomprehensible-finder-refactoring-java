@@ -1,9 +1,11 @@
 package test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,9 +27,9 @@ public class FinderTests {
 		List<Person> list = new ArrayList<Person>();
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.CLOSEST);
-		assertEquals(null, result.first);
-		assertEquals(null, result.second);
+		Optional<Result> result = finder.find(Criteria.CLOSEST);
+
+		assertFalse(result.isPresent());
 	}
 
 	@Test
@@ -37,9 +39,9 @@ public class FinderTests {
 
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.CLOSEST);
-		assertEquals(null, result.first);
-		assertEquals(null, result.second);
+		Optional<Result> result = finder.find(Criteria.CLOSEST);
+
+		assertFalse(result.isPresent());
 	}
 
 	@Test
@@ -49,7 +51,7 @@ public class FinderTests {
 		list.add(greg);
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.CLOSEST);
+		Result result = finder.find(Criteria.CLOSEST).get();
 
 		assertEquals(sue, result.first);
 		assertEquals(greg, result.second);
@@ -63,7 +65,7 @@ public class FinderTests {
 
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.FURTHEST);
+		Result result = finder.find(Criteria.FURTHEST).get();
 
 		assertEquals(greg, result.first);
 		assertEquals(mike, result.second);
@@ -78,7 +80,7 @@ public class FinderTests {
 		list.add(greg);
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.FURTHEST);
+		Result result = finder.find(Criteria.FURTHEST).get();
 
 		assertEquals(sue, result.first);
 		assertEquals(sarah, result.second);
@@ -94,7 +96,7 @@ public class FinderTests {
 
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.CLOSEST);
+		Result result = finder.find(Criteria.CLOSEST).get();
 
 		assertEquals(sue, result.first);
 		assertEquals(greg, result.second);
