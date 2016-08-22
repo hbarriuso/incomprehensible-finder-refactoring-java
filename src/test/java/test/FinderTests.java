@@ -27,7 +27,6 @@ public class FinderTests {
 
 		Result result = finder.find(Criteria.CLOSEST);
 		assertEquals(null, result.first);
-
 		assertEquals(null, result.second);
 	}
 
@@ -39,7 +38,6 @@ public class FinderTests {
 		Finder finder = new Finder(list);
 
 		Result result = finder.find(Criteria.CLOSEST);
-
 		assertEquals(null, result.first);
 		assertEquals(null, result.second);
 	}

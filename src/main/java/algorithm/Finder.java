@@ -9,31 +9,22 @@ public class Finder {
 		this.people = people;
 	}
 
-	public Result find(Criteria criteria) {
-		List<Result> tr = new ArrayList<Result>();
+	public Result find(final Criteria criteria) {
+		Result answer = Result.empty();
 
-		for (int i = 0; i < people.size() - 1; i++) {
-			for (int j = i + 1; j < people.size(); j++) {
-				Result r = new Result();
-				if (people.get(i).bornBefore(people.get(j))) {
-					r.first = people.get(i);
-					r.second = people.get(j);
-				} else {
-					r.first = people.get(j);
-					r.second = people.get(i);
+		if (people.size() > 1) {
+			List<Result> tr = new ArrayList<Result>();
+
+			for (int i = 0; i < people.size() - 1; i++) {
+				for (int j = i + 1; j < people.size(); j++) {
+					Result r = Result.from(people.get(i), people.get(j));
+					tr.add(r);
 				}
-				tr.add(r);
 			}
+
+			answer = tr.stream().reduce(tr.get(0), (a, r) -> criteria.choose(a, r));
 		}
 
-		if (tr.size() < 1) {
-			return new Result();
-		}
-
-		Result answer = tr.get(0);
-		for (Result result : tr) {
-			answer = criteria.choose(answer, result);
-		}
 
 		return answer;
 	}
