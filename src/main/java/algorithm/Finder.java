@@ -11,8 +11,6 @@ public class Finder {
 	}
 
 	public Optional<Result> find(final Criteria criteria) {
-		Optional<Result> answer = Optional.empty();
-
 		List<Result> tr = new ArrayList<Result>();
 		if (people.size() > 1) {
 
