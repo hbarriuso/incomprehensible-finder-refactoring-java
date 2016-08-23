@@ -7,10 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import algorithm.Result;
+import algorithm.Pair;
 import algorithm.Criteria;
 import algorithm.Finder;
 import algorithm.Person;
@@ -24,22 +23,22 @@ public class FinderTests {
 
 	@Test
 	public void Returns_Empty_Results_When_Given_Empty_List() {
-		List<Person> list = new ArrayList<Person>();
+		List<Person> list = new ArrayList<>();
 		Finder finder = new Finder(list);
 
-		Optional<Result> result = finder.find(Criteria.CLOSEST);
+		Optional<Pair> result = finder.find(Criteria.CLOSEST);
 
 		assertFalse(result.isPresent());
 	}
 
 	@Test
 	public void Returns_Empty_Results_When_Given_One_Person() {
-		List<Person> list = new ArrayList<Person>();
+		List<Person> list = new ArrayList<>();
 		list.add(sue);
 
 		Finder finder = new Finder(list);
 
-		Optional<Result> result = finder.find(Criteria.CLOSEST);
+		Optional<Pair> result = finder.find(Criteria.CLOSEST);
 
 		assertFalse(result.isPresent());
 	}
@@ -51,44 +50,44 @@ public class FinderTests {
 		list.add(greg);
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.CLOSEST).get();
+		Pair pair = finder.find(Criteria.CLOSEST).get();
 
-		assertEquals(sue, result.first);
-		assertEquals(greg, result.second);
+		assertEquals(sue, pair.first);
+		assertEquals(greg, pair.second);
 	}
 
 	@Test
 	public void Returns_Furthest_Two_For_Two_People() {
-		List<Person> list = new ArrayList<Person>();
+		List<Person> list = new ArrayList<>();
 		list.add(mike);
 		list.add(greg);
 
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.FURTHEST).get();
+		Pair pair = finder.find(Criteria.FURTHEST).get();
 
-		assertEquals(greg, result.first);
-		assertEquals(mike, result.second);
+		assertEquals(greg, pair.first);
+		assertEquals(mike, pair.second);
 	}
 
 	@Test
 	public void Returns_Furthest_Two_For_Four_People() {
-		List<Person> list = new ArrayList<Person>();
+		List<Person> list = new ArrayList<>();
 		list.add(sue);
 		list.add(sarah);
 		list.add(mike);
 		list.add(greg);
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.FURTHEST).get();
+		Pair pair = finder.find(Criteria.FURTHEST).get();
 
-		assertEquals(sue, result.first);
-		assertEquals(sarah, result.second);
+		assertEquals(sue, pair.first);
+		assertEquals(sarah, pair.second);
 	}
 
 	@Test
 	public void Returns_Closest_Two_For_Four_People() {
-		List<Person> list = new ArrayList<Person>();
+		List<Person> list = new ArrayList<>();
 		list.add(sue);
 		list.add(sarah);
 		list.add(mike);
@@ -96,10 +95,10 @@ public class FinderTests {
 
 		Finder finder = new Finder(list);
 
-		Result result = finder.find(Criteria.CLOSEST).get();
+		Pair pair = finder.find(Criteria.CLOSEST).get();
 
-		assertEquals(sue, result.first);
-		assertEquals(greg, result.second);
+		assertEquals(sue, pair.first);
+		assertEquals(greg, pair.second);
 	}
 
 }

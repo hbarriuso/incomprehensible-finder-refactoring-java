@@ -2,16 +2,16 @@ package algorithm;
 public enum Criteria {
 	CLOSEST {
 		@Override
-		public Result choose(Result answer, Result result) {
-			return result.calculateDistanceBetweenBirthdates() < answer.calculateDistanceBetweenBirthdates() ? result : answer;
+		public Pair choose(Pair answer, Pair pair) {
+			return pair.calculateDistanceBetweenBirthdates() < answer.calculateDistanceBetweenBirthdates() ? pair : answer;
 		}
 	},
 	FURTHEST {
 		@Override
-		public Result choose(Result answer, Result result) {
-			return result.calculateDistanceBetweenBirthdates() > answer.calculateDistanceBetweenBirthdates() ? result : answer;
+		public Pair choose(Pair answer, Pair pair) {
+			return pair.calculateDistanceBetweenBirthdates() > answer.calculateDistanceBetweenBirthdates() ? pair : answer;
 		}
 	};
 
-	public abstract Result choose(Result answer, Result result);
+	public abstract Pair choose(Pair answer, Pair pair);
 }
